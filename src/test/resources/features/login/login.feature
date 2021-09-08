@@ -1,9 +1,12 @@
 Feature: Login
   As a user I would like to login
 
-  Scenario: User logins
+  Scenario Outline: User logins
     Given user is on login page
-    When user logins using following credentials
+    When user adds <userName> and <password> to login
+    Then user should see that he is logged in
+
+    Examples:
     | userName                  | password |
     | ztna.automation@gmail.com | Ztna@123 |
-    Then user should be logged in
+    | hehe@gmail.com            | password |

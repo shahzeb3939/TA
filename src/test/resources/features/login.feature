@@ -8,4 +8,4 @@ Feature: Login
     Examples:
     | email                     | password |
     | ztna.automation@gmail.com | Ztna@123 |
-    | somewon@emumba.com        | wrongpswd |
+#    | somewon@emumba.com        | wrongpswd |

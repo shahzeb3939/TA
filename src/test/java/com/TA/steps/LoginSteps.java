@@ -1,5 +1,6 @@
 package com.TA.steps;
 
+import com.TA.app.login.tasks.Login;
 import com.TA.hooks.SoftAssertionsHook;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,7 +13,6 @@ import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.WebElementQuestion;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
-import org.testng.asserts.SoftAssert;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
@@ -20,7 +20,6 @@ import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
 import static net.serenitybdd.screenplay.questions.WebElementQuestion.the;
 
 public class LoginSteps {
-    SoftAssertions softAssertions = SoftAssertionsHook.softAssertions;
     String email;
 
     @Given("user is on login page")
@@ -31,14 +30,7 @@ public class LoginSteps {
     @When("user adds {word} and {word} to login field")
     public void whenUserLogins(String email, String password) {
         this.email = email;
-
-//        softAssertions.assertThat(1).isEqualTo(4);
-
-        theActorInTheSpotlight().attemptsTo(
-                Enter.keyValues(email).into("//input[@name='email']"),
-                Enter.keyValues(password).into("//input[@name='password']"),
-                Click.on("//button[.//span[.='Sign in']]")
-        );
+        theActorInTheSpotlight().attemptsTo(Login.using(email, password));
     }
 
     @Then("user should see that he is logged in")
